@@ -122,12 +122,12 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
           {PersonalInfoData.skills.projects.map((item, index) => {
             return (
               <motion.figure
-                // initial={{ opacity: 0, scale: 0 }}
-                // animate={{ opacity: 1, scale: 1 }}
-                // transition={{
-                //   duration: 0.3,
-                //   delay: index * 0.05 + 0.8,
-                // }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.3,
+                  delay: index * 0.05 + 0.8,
+                }}
                 key={`${item.name}-${index}`}
                 className="relative aspect-[16/9] w-full bg-zinc-700 rounded-sm cursor-pointer hover:scale-105 duration-200 ease-in-out"
               >
