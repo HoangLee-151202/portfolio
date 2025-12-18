@@ -27,13 +27,13 @@ export const CardList: React.FC<CardListProps> = ({
 }) => {
   return (
     <Card className={cn("flex-row gap-8", className)} {...props}>
-      <h4 className="text-nowrap after:content-['\00BB'] after:ml-2">{name}</h4>
+      <h4 className="text-nowrap flex items-center after:content-['\00BB'] after:ml-2">{name}</h4>
       {data.map((item, index) => {
         return (
           <Tooltip key={`${name}-${index}`}>
             <TooltipTrigger asChild>
               <div className="cursor-pointer">
-                <item.icon height={30} width={30} />
+                <item.icon height={40} width={40} />
               </div>
             </TooltipTrigger>
             <TooltipContent>

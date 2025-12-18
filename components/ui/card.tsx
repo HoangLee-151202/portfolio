@@ -1,22 +1,24 @@
-import * as React from "react"
-import { motion } from "motion/react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
-
-const Card = motion.create(({ className, ...props }: React.ComponentProps<"div">) => {
-  return (
-    <div
-      data-slot="card"
-      ref={props.ref}
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl shadow-sm",
-        "rounded-lg px-6 py-8 border-0",
-        className
-      )}
-      {...props}
-    />
-  );
-});
+const Card = motion.create(
+  ({ className, ...props }: React.ComponentProps<"div">) => {
+    return (
+      <div
+        data-slot="card"
+        ref={props.ref}
+        className={cn(
+          "bg-card text-card-foreground flex flex-col gap-4 rounded-xl shadow-sm",
+          // "rounded-lg px-6 py-8 border-0 max-h-container",
+          "rounded-lg px-6 py-8 border-0",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
 
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -28,7 +30,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
       )}
       {...props}
     />
-  )
+  );
 }
 
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
@@ -38,7 +40,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("leading-none font-semibold", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
@@ -48,10 +50,10 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
-  )
+  );
 }
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+const CardAction = motion.create(({ className, ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="card-action"
@@ -61,18 +63,24 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
       )}
       {...props}
     />
-  )
-}
+  );
+})
 
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-content"
-      className={cn("", className)}
-      {...props}
-    />
-  )
-}
+const CardContent = motion.create(
+  ({ className, ...props }: React.ComponentProps<"div">) => {
+    return (
+      <div
+        data-slot="card-content"
+        ref={props.ref}
+        className={cn(
+          // "overflow-y-auto overflow-x-hidden pr-3 scrollbar",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
 
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -81,7 +89,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("flex items-center [.border-t]:pt-6", className)}
       {...props}
     />
-  )
+  );
 }
 
 export {
@@ -92,4 +100,4 @@ export {
   CardAction,
   CardDescription,
   CardContent,
-}
+};

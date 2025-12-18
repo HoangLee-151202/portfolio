@@ -4,6 +4,7 @@ import * as React from "react"
 import * as PopoverPrimitive from "@radix-ui/react-popover"
 
 import { cn } from "@/lib/utils"
+import { motion } from "motion/react"
 
 const Popover = PopoverPrimitive.Root
 

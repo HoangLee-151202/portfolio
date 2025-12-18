@@ -7,6 +7,24 @@ body {
 }
 
 @layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 0.5rem;
+    padding-left: 1rem;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: oklch(87.1% 0.006 286.286);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: oklch(55.2% 0.016 285.938);
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: oklch(44.2% 0.017 285.786);
+  }
 }
 
 @layer base {
@@ -47,6 +65,8 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --sidebar-width: 300px;
+    --container-px: 10rem;
+    --container-py: 5rem;
   }
 
   * {
@@ -100,6 +120,7 @@ body {
   h6 { @apply text-base; }
 
   article {
-    @apply text-foreground px-40 py-20 mx-auto
+    @apply text-foreground px-[var(--container-px)] py-[var(--container-py)] mx-auto
   }
+  
 }

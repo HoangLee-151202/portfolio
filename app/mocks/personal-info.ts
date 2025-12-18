@@ -373,7 +373,7 @@ export const PersonalInfoData = {
         ]
       }
     ],
-    projects: [
+    projectsOutstanding: [
       {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
@@ -469,6 +469,251 @@ export const PersonalInfoData = {
         },
       ],
     },
-   ]
+    {
+      name: "CHUOICANHO",
+      img: "/assets/images/project.png",
+      type: "Website",
+      techs: [
+        {
+          name: "React",
+          icon: React,
+        },
+        {
+          name: "Spring Boot",
+          icon: Spring,
+        },
+        {
+          name: "PostgreSQL",
+          icon: Postgresql,
+        },
+      ],
+    },
+   ],
+   projects: [
+    {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },{
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },{
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },{
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },{
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+  {
+    name: "CHUOICANHO",
+    img: "/assets/images/project.png",
+    type: "Website",
+    techs: [
+      {
+        name: "React",
+        icon: React,
+      },
+      {
+        name: "Spring Boot",
+        icon: Spring,
+      },
+      {
+        name: "PostgreSQL",
+        icon: Postgresql,
+      },
+    ],
+  },
+ ],
   }
 };

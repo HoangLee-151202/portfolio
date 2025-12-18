@@ -20,7 +20,7 @@ export default function TypeSkills(props: TypeSkillsProps) {
           opacity: 1,
           width: viewActive === ViewEnum.Skills ? "50%" : "0%",
           x: 0,
-          transition: { duration: 0.8, ease: "easeOut" },
+          transition: { duration: 0.8, ease: "easeOut", delay: 0.5 },
         }}
         exit={{
           opacity: 0,

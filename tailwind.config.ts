@@ -56,6 +56,9 @@ const config: Config = {
           foreground: "var(--sidebar-foreground)",
         },
       },
+      maxHeight: {
+        "container": 'calc(100vh - var(--container-py) - var(--container-py))',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
