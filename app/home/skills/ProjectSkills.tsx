@@ -80,30 +80,32 @@ const frameworks = [
 ];
 
 type PaginationState = {
-  page: number        // trang hiện tại (1-based)
-  pageSize: number    // số item / trang
-  totalItems: number  // tổng item
+  page: number; // trang hiện tại (1-based)
+  pageSize: number; // số item / trang
+  totalItems: number; // tổng item
 
-  totalPages: number  // tổng số trang
+  totalPages: number; // tổng số trang
 
-  isLoading: boolean,
-  hasNext: boolean
-  hasPrev: boolean
-}
+  isLoading: boolean;
+  hasNext: boolean;
+  hasPrev: boolean;
+};
 
 export default function ProjectSkills(props: ProjectSkillsProps) {
   const { onChangeView, viewActive } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [isShowFilter, setIsShowFilter] = useState(false);
-  const [projects, setProjects] = useState<typeof PersonalInfoData.skills.projects>([])
+  const [projects, setProjects] = useState<
+    typeof PersonalInfoData.skills.projects
+  >([]);
   const [pagination, setPagination] = useState<PaginationState>({
     page: 1,
     pageSize: 10,
     totalItems: 0,
-  
+
     totalPages: 0,
-  
+
     isLoading: false,
     hasNext: false,
     hasPrev: false,
@@ -114,43 +116,42 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
     pageSize = 12,
     totalItems = PersonalInfoData.skills.projects.length
   ) {
-    setPagination(prev => ({ ...prev, isLoading: true }))
+    setPagination((prev) => ({ ...prev, isLoading: true }));
     setTimeout(() => {
-      const totalPages = Math.ceil(totalItems / pageSize)
-  
-    const safePage = Math.min(Math.max(page, 1), totalPages || 1)
-    const from = totalItems === 0 ? 0 : (safePage - 1) * pageSize + 1
-  const to = Math.min(safePage * pageSize, totalItems)
-    let items = PersonalInfoData.skills.projects.slice(from, to + 1)
-    setProjects(items)
-    setPagination({
-      page: safePage,
-      pageSize,
-      totalItems,
-  
-      totalPages,
-  
-      isLoading: false,
-      hasPrev: safePage > 1,
-      hasNext: safePage < totalPages,
-    })
-    }, 500)
-    
+      const totalPages = Math.ceil(totalItems / pageSize);
+
+      const safePage = Math.min(Math.max(page, 1), totalPages || 1);
+      const from = totalItems === 0 ? 0 : (safePage - 1) * pageSize + 1;
+      const to = Math.min(safePage * pageSize, totalItems);
+      let items = PersonalInfoData.skills.projects.slice(from, to + 1);
+      setProjects(items);
+      setPagination({
+        page: safePage,
+        pageSize,
+        totalItems,
+
+        totalPages,
+
+        isLoading: false,
+        hasPrev: safePage > 1,
+        hasNext: safePage < totalPages,
+      });
+    }, 1000);
   }
 
   const goNext = () => {
-    if (!pagination.hasNext) return
-    buildPagination(pagination.page + 1)
-  }
-  
+    if (!pagination.hasNext) return;
+    buildPagination(pagination.page + 1);
+  };
+
   const goPrev = () => {
-    if (!pagination.hasPrev) return
-    buildPagination(pagination.page - 1)
-  }
+    if (!pagination.hasPrev) return;
+    buildPagination(pagination.page - 1);
+  };
 
   useEffect(() => {
-    if (isShowFilter) buildPagination(1)
-  }, [isShowFilter])
+    if (isShowFilter) buildPagination(1);
+  }, [isShowFilter]);
 
   return (
     <AnimatePresence mode="wait" propagate>
@@ -168,10 +169,10 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
           x: "5rem",
           transition: { duration: 0.5, ease: "easeIn" },
         }}
-        onAnimationComplete={definition => {
+        onAnimationComplete={(definition) => {
           if (typeof definition === "object" && "width" in definition) {
             if (definition.width === "100%") {
-              setIsShowFilter(true)
+              setIsShowFilter(true);
             }
           }
         }}
@@ -218,105 +219,128 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
           </CardTitle>
           <AnimatePresence>
             {isShowFilter && (
-            <CardAction exit={{opacity: 0}} transition={{duration: 0.5}} className="flex gap-4">
-              <Pagination initial={{ opacity: 0, y: "1rem" }}
-                animate={{ opacity: 1, y: 0}}
-                transition={{ duration: 0.5}}>
-      <PaginationContent className='w-full justify-between'>
-        <PaginationItem>
-          <PaginationPrevious isActive={pagination.hasPrev} className='border' onClick={goPrev}/>
-        </PaginationItem>
-        <PaginationItem>
-          <p className='text-muted-foreground text-sm' aria-live='polite'>
-            Page <span className='text-foreground'>{pagination.page}</span> of <span className='text-foreground'>{pagination.totalPages}</span>
-          </p>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext isActive={pagination.hasNext} className='border' onClick={goNext}/>
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    initial={{ opacity: 0, y: "1rem" }}
-                    animate={{ opacity: 1, y: 0}}
-                    transition={{ duration: 0.5, delay: 0.15}}
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="w-[200px] justify-between"
-                  >
-                    {value
-                      ? frameworks.find(
-                          (framework) => framework.value === value
-                        )?.label
-                      : "Select skill..."}
-                    <ChevronsUpDown className="opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
-                  <Command>
-                    <CommandInput
-                      placeholder="Search skill..."
-                      className="h-9"
-                    />
-                    <CommandList>
-                      <CommandEmpty>No framework found.</CommandEmpty>
-                      <CommandGroup>
-                        {frameworks.map((framework) => (
-                          <CommandItem
-                            key={framework.value}
-                            value={framework.value}
-                            onSelect={(currentValue) => {
-                              setValue(
-                                currentValue === value ? "" : currentValue
-                              );
-                              setOpen(false);
-                            }}
-                          >
-                            {framework.label}
-                            <Check
-                              className={cn(
-                                "ml-auto",
-                                value === framework.value
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              )}
-                            />
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-              <Select>
-                <SelectTrigger
+              <CardAction
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex gap-4"
+              >
+                <Pagination
                   initial={{ opacity: 0, y: "1rem" }}
-                  animate={{ opacity: 1, y: 0}}
-                  transition={{ duration: 0.5, delay: 0.3}}
-                  variant="outline"
-                  className="w-[180px]"
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <SelectValue placeholder="Select a fruit" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Fruits</SelectLabel>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                    <SelectItem value="grapes">Grapes</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            
-            </CardAction>
+                  <PaginationContent className="w-full justify-between">
+                    <PaginationItem>
+                      <PaginationPrevious
+                        isActive={pagination.hasPrev}
+                        className="border"
+                        onClick={() => !pagination.isLoading && goPrev()}
+                      />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <p
+                        className="text-muted-foreground text-sm"
+                        aria-live="polite"
+                      >
+                        Page{" "}
+                        <span className="text-foreground">
+                          {pagination.page}
+                        </span>{" "}
+                        of{" "}
+                        <span className="text-foreground">
+                          {pagination.totalPages ? pagination.totalPages : "-"}
+                        </span>
+                      </p>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext
+                        isActive={pagination.hasNext}
+                        className="border"
+                        onClick={() => !pagination.isLoading && goNext()}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+                <Popover open={open} onOpenChange={setOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      initial={{ opacity: 0, y: "1rem" }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.15 }}
+                      variant="outline"
+                      role="combobox"
+                      aria-expanded={open}
+                      className="w-[200px] justify-between"
+                    >
+                      {value
+                        ? frameworks.find(
+                            (framework) => framework.value === value
+                          )?.label
+                        : "Select skill..."}
+                      <ChevronsUpDown className="opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[200px] p-0">
+                    <Command>
+                      <CommandInput
+                        placeholder="Search skill..."
+                        className="h-9"
+                      />
+                      <CommandList>
+                        <CommandEmpty>No framework found.</CommandEmpty>
+                        <CommandGroup>
+                          {frameworks.map((framework) => (
+                            <CommandItem
+                              key={framework.value}
+                              value={framework.value}
+                              onSelect={(currentValue) => {
+                                setValue(
+                                  currentValue === value ? "" : currentValue
+                                );
+                                setOpen(false);
+                              }}
+                            >
+                              {framework.label}
+                              <Check
+                                className={cn(
+                                  "ml-auto",
+                                  value === framework.value
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                                )}
+                              />
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <Select>
+                  <SelectTrigger
+                    initial={{ opacity: 0, y: "1rem" }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    variant="outline"
+                    className="w-[180px]"
+                  >
+                    <SelectValue placeholder="Select a fruit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Fruits</SelectLabel>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="blueberry">Blueberry</SelectItem>
+                      <SelectItem value="grapes">Grapes</SelectItem>
+                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </CardAction>
             )}
-            </AnimatePresence>
-          </CardHeader>
+          </AnimatePresence>
+        </CardHeader>
         <CardContent
           animate={{
             gridTemplateColumns:
@@ -325,66 +349,75 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                 : "repeat(4, minmax(0, 1fr))",
           }}
           transition={{ delay: 0.5 }}
-          className={cn("grid gap-x-8 gap-y-6 h-full")}
+          className={cn("grid content-start h-full gap-x-8 gap-y-6 relative")}
         >
-          <AnimatePresence mode="wait" propagate>
-            {pagination.isLoading ? <div className="col-span-4 flex justify-center items-center"><Spinner initial={{display: "none"}} animate={{display: "block"}} transition={{delay: 0.5}}/></div> : 
-            (viewActive === ViewEnum.Skills
-              ? PersonalInfoData.skills.projectsOutstanding
-              : projects
-            ).map((item, index) => {
-              return (  
-                <motion.figure
-                key={`${viewActive}-${item.name}-${index}`}
-                  initial={{ opacity: 0.9, scale: 0, display: "none" }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    display: "block",
-                    transition: {
-                      duration: 0.3,
-                      delay: index * 0.05 + (projects.length ? 0 : 1.3),
-                    },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    display: "none",
-                    transition: { duration: 0.5 },
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  className="relative aspect-[16/9] w-full bg-zinc-700 rounded-sm cursor-pointer"
-                >
-                  <Image
-                    src={item.img}
-                    loading="lazy"
-                    alt="Project"
-                    fill
-                    className="object-cover rounded-sm !relative"
-                  />
-                  <figcaption className="font-bold px-4 py-2 flex items-center">
-                    <span className="after:border-r-2 after:mx-2">
-                      {item.name}
-                    </span>
-                    <div className="flex gap-2">
-                      {item.techs.map((tech, index) => {
-                        return (
-                          <Tooltip key={`${item.name}-${index}`}>
-                            <TooltipTrigger asChild>
-                              <div className="cursor-pointer">
-                                <tech.icon width={20} height={20} />
-                              </div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>{tech.name}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        );
-                      })}
-                    </div>
-                  </figcaption>
-                </motion.figure>
-              );
-            })}
+          <AnimatePresence>
+            {pagination.isLoading ? (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Spinner
+                  initial={{ display: "none" }}
+                  animate={{ display: "block" }}
+                  transition={{ delay: 0.8 }}
+                />
+              </div>
+            ) : (
+              (viewActive === ViewEnum.Skills
+                ? PersonalInfoData.skills.projectsOutstanding
+                : projects
+              ).map((item, index) => {
+                return (
+                  <motion.figure
+                    key={`${viewActive}-${item.name}-${index}`}
+                    initial={{ opacity: 0.9, scale: 0, display: "none" }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      display: "block",
+                      transition: {
+                        duration: 0.3,
+                        delay: index * 0.05 + (projects.length ? 0 : 1.3),
+                      },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      display: "none",
+                      transition: { duration: 0.5 },
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    className="relative aspect-[16/9] w-full bg-zinc-700 rounded-sm cursor-pointer"
+                  >
+                    <Image
+                      src={item.img}
+                      loading="lazy"
+                      alt="Project"
+                      fill
+                      className="object-cover rounded-sm !relative"
+                    />
+                    <figcaption className="font-bold px-4 py-2 flex items-center">
+                      <span className="after:border-r-2 after:mx-2">
+                        {item.name}
+                      </span>
+                      <div className="flex gap-2">
+                        {item.techs.map((tech, index) => {
+                          return (
+                            <Tooltip key={`${item.name}-${index}`}>
+                              <TooltipTrigger asChild>
+                                <div className="cursor-pointer">
+                                  <tech.icon width={20} height={20} />
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{tech.name}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          );
+                        })}
+                      </div>
+                    </figcaption>
+                  </motion.figure>
+                );
+              })
+            )}
           </AnimatePresence>
         </CardContent>
       </Card>
