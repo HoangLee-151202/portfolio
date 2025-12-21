@@ -13,7 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ViewEnum, ViewType } from ".";
 import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
@@ -50,6 +50,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 interface ProjectSkillsProps {
   onChangeView: (view: ViewType) => void;
   viewActive: ViewType;
@@ -78,10 +79,78 @@ const frameworks = [
   },
 ];
 
+type PaginationState = {
+  page: number        // trang hiện tại (1-based)
+  pageSize: number    // số item / trang
+  totalItems: number  // tổng item
+
+  totalPages: number  // tổng số trang
+
+  isLoading: boolean,
+  hasNext: boolean
+  hasPrev: boolean
+}
+
 export default function ProjectSkills(props: ProjectSkillsProps) {
   const { onChangeView, viewActive } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+  const [isShowFilter, setIsShowFilter] = useState(false);
+  const [projects, setProjects] = useState<typeof PersonalInfoData.skills.projects>([])
+  const [pagination, setPagination] = useState<PaginationState>({
+    page: 1,
+    pageSize: 10,
+    totalItems: 0,
+  
+    totalPages: 0,
+  
+    isLoading: false,
+    hasNext: false,
+    hasPrev: false,
+  });
+
+  function buildPagination(
+    page: number,
+    pageSize = 12,
+    totalItems = PersonalInfoData.skills.projects.length
+  ) {
+    setPagination(prev => ({ ...prev, isLoading: true }))
+    setTimeout(() => {
+      const totalPages = Math.ceil(totalItems / pageSize)
+  
+    const safePage = Math.min(Math.max(page, 1), totalPages || 1)
+    const from = totalItems === 0 ? 0 : (safePage - 1) * pageSize + 1
+  const to = Math.min(safePage * pageSize, totalItems)
+    let items = PersonalInfoData.skills.projects.slice(from, to + 1)
+    setProjects(items)
+    setPagination({
+      page: safePage,
+      pageSize,
+      totalItems,
+  
+      totalPages,
+  
+      isLoading: false,
+      hasPrev: safePage > 1,
+      hasNext: safePage < totalPages,
+    })
+    }, 500)
+    
+  }
+
+  const goNext = () => {
+    if (!pagination.hasNext) return
+    buildPagination(pagination.page + 1)
+  }
+  
+  const goPrev = () => {
+    if (!pagination.hasPrev) return
+    buildPagination(pagination.page - 1)
+  }
+
+  useEffect(() => {
+    if (isShowFilter) buildPagination(1)
+  }, [isShowFilter])
 
   return (
     <AnimatePresence mode="wait" propagate>
@@ -99,6 +168,14 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
           x: "5rem",
           transition: { duration: 0.5, ease: "easeIn" },
         }}
+        onAnimationComplete={definition => {
+          if (typeof definition === "object" && "width" in definition) {
+            if (definition.width === "100%") {
+              setIsShowFilter(true)
+            }
+          }
+        }}
+        onAnimationStart={() => setIsShowFilter(false)}
       >
         <CardHeader>
           <CardTitle>
@@ -112,7 +189,10 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                     transition={{ duration: 0.5, delay: 1.3 }}
                     variant="ghost"
                     size="icon"
-                    onClick={() => onChangeView("Skills")}
+                    onClick={() => {
+                      onChangeView("Skills");
+                      setProjects([]);
+                    }}
                   >
                     <ChevronLeftIcon strokeWidth={6} />
                   </Button>
@@ -136,36 +216,32 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
               )}
             </div>
           </CardTitle>
-          {viewActive === ViewEnum.Projects && (
-            <CardAction className="flex gap-4">
-              <Pagination initial={{opacity: 0, y: "1rem", display: "none"}} animate={{opacity: 1, y: 0, display: "flex"}} transition={{duration: 0.5, delay: 1.7}}>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious href="#" />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationNext href="#" />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+          <AnimatePresence>
+            {isShowFilter && (
+            <CardAction exit={{opacity: 0}} transition={{duration: 0.5}} className="flex gap-4">
+              <Pagination initial={{ opacity: 0, y: "1rem" }}
+                animate={{ opacity: 1, y: 0}}
+                transition={{ duration: 0.5}}>
+      <PaginationContent className='w-full justify-between'>
+        <PaginationItem>
+          <PaginationPrevious isActive={pagination.hasPrev} className='border' onClick={goPrev}/>
+        </PaginationItem>
+        <PaginationItem>
+          <p className='text-muted-foreground text-sm' aria-live='polite'>
+            Page <span className='text-foreground'>{pagination.page}</span> of <span className='text-foreground'>{pagination.totalPages}</span>
+          </p>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext isActive={pagination.hasNext} className='border' onClick={goNext}/>
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                   <Button
-                  initial={{opacity: 0, y: "1rem", display: "none"}} animate={{opacity: 1, y: 0, display: "flex"}} transition={{duration: 0.5, delay: 1.5}}
+                    initial={{ opacity: 0, y: "1rem" }}
+                    animate={{ opacity: 1, y: 0}}
+                    transition={{ duration: 0.5, delay: 0.15}}
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
@@ -215,8 +291,14 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <Select >
-                <SelectTrigger initial={{opacity: 0, y: "1rem", display: "none"}} animate={{opacity: 1, y: 0, display: "flex"}} transition={{duration: 0.5, delay: 1.3}} className="w-[180px]">
+              <Select>
+                <SelectTrigger
+                  initial={{ opacity: 0, y: "1rem" }}
+                  animate={{ opacity: 1, y: 0}}
+                  transition={{ duration: 0.5, delay: 0.3}}
+                  variant="outline"
+                  className="w-[180px]"
+                >
                   <SelectValue placeholder="Select a fruit" />
                 </SelectTrigger>
                 <SelectContent>
@@ -230,9 +312,11 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+            
             </CardAction>
-          )}
-        </CardHeader>
+            )}
+            </AnimatePresence>
+          </CardHeader>
         <CardContent
           animate={{
             gridTemplateColumns:
@@ -241,15 +325,17 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                 : "repeat(4, minmax(0, 1fr))",
           }}
           transition={{ delay: 0.5 }}
-          className={cn("grid gap-x-8 gap-y-6")}
+          className={cn("grid gap-x-8 gap-y-6 h-full")}
         >
-          <AnimatePresence>
-            {(viewActive === ViewEnum.Skills
+          <AnimatePresence mode="wait" propagate>
+            {pagination.isLoading ? <div className="col-span-4 flex justify-center items-center"><Spinner initial={{display: "none"}} animate={{display: "block"}} transition={{delay: 0.5}}/></div> : 
+            (viewActive === ViewEnum.Skills
               ? PersonalInfoData.skills.projectsOutstanding
-              : PersonalInfoData.skills.projects
+              : projects
             ).map((item, index) => {
-              return (
+              return (  
                 <motion.figure
+                key={`${viewActive}-${item.name}-${index}`}
                   initial={{ opacity: 0.9, scale: 0, display: "none" }}
                   animate={{
                     opacity: 1,
@@ -257,7 +343,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                     display: "block",
                     transition: {
                       duration: 0.3,
-                      delay: index * 0.05 + 1.3,
+                      delay: index * 0.05 + (projects.length ? 0 : 1.3),
                     },
                   }}
                   exit={{
@@ -265,7 +351,6 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                     display: "none",
                     transition: { duration: 0.5 },
                   }}
-                  key={`${viewActive}-${item.name}-${index}`}
                   whileHover={{ scale: 1.05 }}
                   className="relative aspect-[16/9] w-full bg-zinc-700 rounded-sm cursor-pointer"
                 >
