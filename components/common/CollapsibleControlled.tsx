@@ -60,7 +60,7 @@ export default function CollapsibleControlled(
             opacity: isOpen ? 1 : 0,
             transition: { duration: 0.5, ease: "easeInOut" },
           }}
-          className="overflow-y-hidden"
+          className="overflow-y-clip"
         >
       {children}
         </motion.div>
