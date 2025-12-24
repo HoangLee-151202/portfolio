@@ -53,14 +53,14 @@ export default function CollapsibleControlled(
         </Button>
       </CollapsibleTrigger>
 
-      <CollapsibleContent asChild>
+      <CollapsibleContent asChild forceMount>
         <motion.div
           animate={{
             height: isOpen ? "auto" : 0,
             opacity: isOpen ? 1 : 0,
             transition: { duration: 0.5, ease: "easeInOut" },
           }}
-        //   className="overflow-y-clip overflow-x-visible"
+          className="overflow-y-hidden"
         >
       {children}
         </motion.div>
