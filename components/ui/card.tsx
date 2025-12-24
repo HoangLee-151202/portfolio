@@ -73,7 +73,6 @@ const CardContent = motion.create(
         data-slot="card-content"
         ref={props.ref}
         className={cn(
-          // "overflow-y-auto overflow-x-hidden pr-3 scrollbar",
           className
         )}
         {...props}

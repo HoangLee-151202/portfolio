@@ -5,7 +5,6 @@ import { MAIN_MENU, MAIN_MENU_TYPE } from "../config/menu";
 interface AppContextType {
   defaultActiveSection: string;
   activeSection: MAIN_MENU_TYPE;
-  isChangeSection: boolean;
   onChangeActiveSection: (section: MAIN_MENU_TYPE) => void;
   resetActiveSection: () => void;
 }
@@ -20,7 +19,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   const defaultActiveSection = MAIN_MENU[0].id;
   const [activeSection, setActiveSection] =
     useState<MAIN_MENU_TYPE>(defaultActiveSection);
-  const [isChangeSection, setIsChangeSection] = useState(false);
 
   const onChangeActiveSection = (section: MAIN_MENU_TYPE) => {
     setActiveSection(section);
@@ -35,7 +33,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       value={{
         defaultActiveSection,
         activeSection,
-        isChangeSection,
         onChangeActiveSection,
         resetActiveSection,
       }}

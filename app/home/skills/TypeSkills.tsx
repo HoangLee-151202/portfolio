@@ -19,14 +19,19 @@ export default function TypeSkills(props: TypeSkillsProps) {
         animate={{
           opacity: 1,
           width: viewActive === ViewEnum.Skills ? "50%" : "0%",
+          visibility: viewActive === ViewEnum.Skills ? "visible" : "hidden",
           x: 0,
           transition: { duration: 0.8, ease: "easeOut", delay: 0.5 },
         }}
-        exit={{
-          opacity: 0,
-          x: "-5rem",
-          transition: { duration: 0.5, ease: "easeIn" },
-        }}
+        exit={
+          viewActive === ViewEnum.Skills
+            ? {
+                opacity: 0,
+                x: "-5rem",
+                transition: { duration: 0.5, ease: "easeIn" },
+              }
+            : undefined
+        }
         className={cn("space-y-8")}
       >
         {PersonalInfoData.skills.types.map((item, index) => {
