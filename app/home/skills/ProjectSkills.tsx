@@ -22,14 +22,51 @@ import { AnimatePresence } from "motion/react";
 import { projectData } from "@/app/mocks/projects";
 import { ChevronLeftIcon } from "lucide-react";
 import CollapsibleControlled from "@/components/common/CollapsibleControlled";
+import { useState } from "react";
+import TabRow from "./Tab";
 
 interface ProjectSkillsProps {
   onChangeView: (view: ViewType) => void;
   viewActive: ViewType;
 }
 
+export type TabItem = {
+  id: string
+  label: string
+  isSelected: boolean
+}
+
+const initialTabs: TabItem[] = [
+  { id: "tab-1", label: "Tab 1", isSelected: true },
+  { id: "tab-2", label: "Tab 2", isSelected: false },
+  { id: "tab-3", label: "Tab 3", isSelected: false },
+]
+
+const allIngredients = [
+  { icon: "🍅", label: "Tomato" },
+  { icon: "🥬", label: "Lettuce" },
+  { icon: "🧀", label: "Cheese" },
+  { icon: "🥕", label: "Carrot" },
+  { icon: "🍌", label: "Banana" },
+  { icon: "🫐", label: "Blueberries" },
+  { icon: "🥂", label: "Champers?" },
+]
+
+const [tomato, lettuce, cheese] = allIngredients
+const tabs = [tomato, lettuce, cheese]
+
 export default function ProjectSkills(props: ProjectSkillsProps) {
   const { onChangeView } = props;
+
+  const tabItems = [
+    { value: "basicInfo", label: "Basic Info" },
+    { value: "responsibilities", label: "Responsibilities" },
+    { value: "techStack", label: "Tech Stack" },
+  ]
+
+  const [activeTab, setActiveTab] = useState(tabItems[0].value)
+  const [selectedTab, setSelectedTab] = useState(tabs[0])
+
   return (
     <AnimatePresence mode="wait" propagate>
       <article id="project">
@@ -157,6 +194,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
               </Button>
             </div>
           </motion.div>
+         
           <Card
             initial={{ opacity: 0, x: "5rem" }}
             animate={{
@@ -175,14 +213,41 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
             className="col-span-2 relative"
           >
             <CardContent>
-              <Tabs defaultValue="info">
+            <TabRow id="main-tabs" items={initialTabs} />
+              
+              <Tabs value={activeTab} onValueChange={setActiveTab}>
                 <TabsList className="mb-2">
-                  <TabsTrigger value="info">Basic Info</TabsTrigger>
-                  <TabsTrigger value="responsibilities">
-                    Responsibilities
-                  </TabsTrigger>
-                  <TabsTrigger value="techStack">Tech Stack</TabsTrigger>
+                {tabItems.map((tab) => (
+      <TabsTrigger
+        key={tab.value}
+        value={tab.value}
+      >
+        {tab.label}
+
+        {/* Indicator */}
+        <AnimatePresence>
+          {tab.value === activeTab && (
+            <motion.div
+              layoutId="tab-indicator"
+              className="absolute inset-0 z-[-1] rounded-md bg-background shadow"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+          )}
+        </AnimatePresence>
+      </TabsTrigger>
+    ))}
                 </TabsList>
+                <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.2 }}
+          >
+            {activeTab}
+          </motion.div>
+        </AnimatePresence>
                 <TabsContent value="info">
                   <div className="space-y-2">
                     <p className="text-sm">

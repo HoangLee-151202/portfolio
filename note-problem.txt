@@ -1,0 +1,1 @@
+Overflow Y hidden nhưng bị hidden cả chiều X => Phải dùng Overflow Y Clip <https://chatgpt.com/c/694ea7ed-b2c8-8320-b6eb-a63a2cbe86ed>
