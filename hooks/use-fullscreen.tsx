@@ -1,17 +1,20 @@
 "use client";
 
-import { useCallback } from "react";
+export const getFullscreenState = (): boolean => {
+  if (typeof document === "undefined") return false;
 
-export const getFullscreenState = () =>
-  !!(
+  return !!(
     document.fullscreenElement ||
     (document as any).webkitFullscreenElement
   );
+};
 
-  export const toggleFullscreen = () => {
-    if (!getFullscreenState()) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  };
+export const toggleFullscreen = () => {
+  if (typeof document === "undefined") return;
+
+  if (!getFullscreenState()) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+};

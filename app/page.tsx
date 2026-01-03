@@ -25,7 +25,7 @@ export default function Home() {
       <Sidebar />
       <ExtraAction />
       <main className="ml-[var(--sidebar-width)]">
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {section ? <section.component key={section.id}/> : null}
         </AnimatePresence>
       </main>
