@@ -1,78 +1,67 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { useFullscreen } from "@/hooks/use-fullscreen";
-import { useDetectFullscreen } from "@/hooks/use-detect-fullscreen";
+import { useEffect, useState } from "react";
+import { getFullscreenState, toggleFullscreen } from "@/hooks/use-fullscreen";
 import { useTheme } from "next-themes";
 import { EXTRA_ACTION } from "@/app/config/menu";
-
-enum CHANGE_ACTION_STATUS {
-  Initial,
-  Processing,
-  Finished,
-}
+import { useApp } from "@/app/context/AppContext";
+import * as motion from "motion/react-client";
 
 export default function ExtraAction() {
-  const { toggle } = useFullscreen();
+  const { setIsFullscreen } = useApp();
   const { theme, setTheme } = useTheme();
   const [actions, setActions] = useState(
     EXTRA_ACTION.map((action) => ({
       ...action,
-      changeStatus: CHANGE_ACTION_STATUS.Initial,
     }))
   );
 
-  useDetectFullscreen(() => {
-    onchangeAction(0);
-  });
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      const isFullscreen = getFullscreenState();
+      setIsFullscreen(isFullscreen);
+    };
+  
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+  
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", onFullscreenChange);
+    };
+  }, []);
 
   const onchangeAction = (index: number) => {
-    setActions((prev) =>
-      prev.map((item, i) =>
-        i === index
-          ? { ...item, changeStatus: CHANGE_ACTION_STATUS.Processing }
-          : item
-      )
-    );
-
-    setTimeout(() => {
       setActions((prev) =>
         prev.map((item, i) => {
           if (i === index) {
-            item.id === 'zoom' && toggle()
+            item.id === 'zoom' && toggleFullscreen()
             item.id === 'theme' && setTheme(theme === 'dark' ? 'light' : 'dark')
             return {
               ...item,
-              changeStatus: CHANGE_ACTION_STATUS.Finished,
               icon: item.opposite,
               opposite: item.icon,
             };
           } else return item;
         })
       );
-    }, 150);
   };
 
   return (
     <div className="fixed right-10 top-20 space-y-6">
       {actions.map((item, index) => {
-        let delayTime = index * 50;
         return (
+          <motion.div key={`extra-action-${index}`} initial={{opacity: 0, x: "5rem"}} animate={{opacity: 1, x: 0}} transition={{duration: 0.8, delay: index*0.05}}>
           <item.icon
             key={item.id}
             className={cn(
               "hover:text-primary cursor-pointer",
-              `animate-fade-slide-left [animation-delay:${delayTime}ms] opacity-0`,
-              item.changeStatus == CHANGE_ACTION_STATUS.Processing
-                ? "animate-zoom-out opacity-1"
-                : "",
-              item.changeStatus == CHANGE_ACTION_STATUS.Finished
-                ? "animate-zoom-in opacity-1"
-                : ""
+            
             )}
             onClick={(e) => onchangeAction(index)}
           />
+          </motion.div>
         );
       })}
     </div>

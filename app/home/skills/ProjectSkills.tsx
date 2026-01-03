@@ -10,20 +10,23 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@iconify/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import { ViewType } from ".";
 import * as motion from "motion/react-client";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, LayoutGroup } from "motion/react";
 import { projectData } from "@/app/mocks/projects";
-import { ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, X } from "lucide-react";
 import CollapsibleControlled from "@/components/common/CollapsibleControlled";
 import { useState } from "react";
 import TabRow from "./Tab";
+import ContentProjectSkills from "./ContentProjectSkills";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import Link from "next/link";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import DialogCarousel from "./DialogCarousel";
 
 interface ProjectSkillsProps {
   onChangeView: (view: ViewType) => void;
@@ -31,29 +34,10 @@ interface ProjectSkillsProps {
 }
 
 export type TabItem = {
-  id: string
-  label: string
-  isSelected: boolean
-}
-
-const initialTabs: TabItem[] = [
-  { id: "tab-1", label: "Tab 1", isSelected: true },
-  { id: "tab-2", label: "Tab 2", isSelected: false },
-  { id: "tab-3", label: "Tab 3", isSelected: false },
-]
-
-const allIngredients = [
-  { icon: "🍅", label: "Tomato" },
-  { icon: "🥬", label: "Lettuce" },
-  { icon: "🧀", label: "Cheese" },
-  { icon: "🥕", label: "Carrot" },
-  { icon: "🍌", label: "Banana" },
-  { icon: "🫐", label: "Blueberries" },
-  { icon: "🥂", label: "Champers?" },
-]
-
-const [tomato, lettuce, cheese] = allIngredients
-const tabs = [tomato, lettuce, cheese]
+  id: string;
+  label: string;
+  isSelected: boolean;
+};
 
 export default function ProjectSkills(props: ProjectSkillsProps) {
   const { onChangeView } = props;
@@ -62,10 +46,9 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
     { value: "basicInfo", label: "Basic Info" },
     { value: "responsibilities", label: "Responsibilities" },
     { value: "techStack", label: "Tech Stack" },
-  ]
+  ];
 
-  const [activeTab, setActiveTab] = useState(tabItems[0].value)
-  const [selectedTab, setSelectedTab] = useState(tabs[0])
+  const [layoutIdActive, setLayoutIdActie] = useState("");
 
   return (
     <AnimatePresence mode="wait" propagate>
@@ -115,33 +98,24 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
           >
             <Carousel>
               <CarouselContent>
-                <CarouselItem>
-                  <Image
-                    src={"/assets/images/project.png"}
-                    loading="lazy"
-                    alt="About"
-                    fill
-                    className="object-cover rounded-sm !relative right-0 !h-[14rem]"
-                  />
-                </CarouselItem>
-                <CarouselItem>
-                  <Image
-                    src={"/assets/images/project.png"}
-                    loading="lazy"
-                    alt="About"
-                    fill
-                    className="object-cover rounded-sm !relative right-0 !h-[14rem]"
-                  />
-                </CarouselItem>
-                <CarouselItem>
-                  <Image
-                    src={"/assets/images/project.png"}
-                    loading="lazy"
-                    alt="About"
-                    fill
-                    className="object-cover rounded-sm !relative right-0 !h-[14rem]"
-                  />
-                </CarouselItem>
+                {projectData.images.map((item, index) => (
+                  <CarouselItem>
+                    <Dialog>
+                      <DialogTrigger asChild className="cursor-pointer">
+                        <Image
+                          src={item}
+                          loading="lazy"
+                          alt="About"
+                          fill
+                          className="object-cover rounded-sm !relative right-0 !h-[14rem]"
+                        />
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogCarousel />
+                      </DialogContent>
+                    </Dialog>
+                  </CarouselItem>
+                ))}
               </CarouselContent>
               <CarouselPrevious className="left-4 bg-background bg-opacity-80 rounded-[100%]" />
               <CarouselNext className="right-4 bg-background bg-opacity-80 rounded-[100%]" />
@@ -176,25 +150,51 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
               </Badge>
             </div>
             <div className="absolute top-3 right-3 space-x-1">
-              <Button
-                variant="secondary"
-                size="icon"
-                aria-label="Live Demo"
-                className="text-white text-xs bg-background bg-opacity-80 rounded-[100%]"
-              >
-                <Icon fontSize={24} icon={"mingcute:live-fill"} />
-              </Button>
-              <Button
-                variant="secondary"
-                size="icon"
-                aria-label="Source Code"
-                className="text-white text-xs bg-background bg-opacity-80 rounded-[100%]"
-              >
-                <Icon fontSize={24} icon={"mingcute:github-fill"} />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href="https://www.youtube.com/watch?v=h7cOOfpdEfk&list=RDc5XLdnN11ks&index=2"
+                    target="_blank"
+                    className="py-2"
+                  >
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      aria-label="Live Demo"
+                      className="text-white text-xs bg-background bg-opacity-80 rounded-[100%]"
+                    >
+                      <Icon fontSize={24} icon={"mingcute:live-fill"} />
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Demo</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href="https://www.youtube.com/watch?v=h7cOOfpdEfk&list=RDc5XLdnN11ks&index=2"
+                    target="_blank"
+                    className="py-2"
+                  >
+                    <Button
+                      variant="link"
+                      size="icon"
+                      aria-label="Source Code"
+                      className="text-white text-xs bg-background bg-opacity-80 rounded-[100%]"
+                    >
+                      <Icon fontSize={24} icon={"mingcute:github-fill"} />
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>GitHub</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </motion.div>
-         
+
           <Card
             initial={{ opacity: 0, x: "5rem" }}
             animate={{
@@ -213,189 +213,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
             className="col-span-2 relative"
           >
             <CardContent>
-            <TabRow id="main-tabs" items={initialTabs} />
-              
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="mb-2">
-                {tabItems.map((tab) => (
-      <TabsTrigger
-        key={tab.value}
-        value={tab.value}
-      >
-        {tab.label}
-
-        {/* Indicator */}
-        <AnimatePresence>
-          {tab.value === activeTab && (
-            <motion.div
-              layoutId="tab-indicator"
-              className="absolute inset-0 z-[-1] rounded-md bg-background shadow"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
-          )}
-        </AnimatePresence>
-      </TabsTrigger>
-    ))}
-                </TabsList>
-                <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.2 }}
-          >
-            {activeTab}
-          </motion.div>
-        </AnimatePresence>
-                <TabsContent value="info">
-                  <div className="space-y-2">
-                    <p className="text-sm">
-                      The project is a modern web platform with a focus on
-                      performance, stability and user experience. The system is
-                      built with a flexible architecture, easy to expand and
-                      suitable for large-scale growth.
-                    </p>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="responsibilities">
-                  <ol className="text-zinc-300 text-sm list-decimal ml-8">
-                    <li>
-                      Built front-end and back-end features for seamless user
-                      experience.
-                    </li>
-                    <li>
-                      Developed and integrated secure, scalable REST/GraphQL
-                      APIs.
-                    </li>
-
-                    <li>
-                      Implemented clean architecture for flexibility and
-                      long-term scalability
-                    </li>
-                    <li>
-                      Optimized performance across front-end, back-end, and
-                      database layers.
-                    </li>
-                    <li>
-                      Set up CI/CD pipelines and essential monitoring tools.
-                    </li>
-                  </ol>
-                  {/* Liệt kê những phần bạn thực sự tham gia: Developed
-                frontend using React/Next.js Designed and implemented REST
-                API Integrated authentication (JWT/ OAuth) Database design
-                & optimization SEO & performance improvements Deployment
-                on Vercel / VPS / Docker */}
-                </TabsContent>
-                <TabsContent
-                  value="techStack"
-                  className="grid md:grid-cols-2 gap-6"
-                >
-                  <div>
-                    <p className="text-sm font-bold flex gap-2">
-                      Frontend:
-                      <span className="flex gap-2">
-                        {/* {skillsData.frontend.map((item) => {
-                      return (
-                        <Icon
-                          key={item.icon}
-                          fontSize={16}
-                          icon={item.icon}
-                          className=""
-                        />
-                      );
-                    })} */}
-                      </span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold flex gap-2">
-                      Backend:
-                      <span className="flex gap-2">
-                        {/* {skillsData.frontend.map((item) => {
-                      return (
-                        <Icon
-                          key={item.icon}
-                          fontSize={16}
-                          icon={item.icon}
-                          className=""
-                        />
-                      );
-                    })} */}
-                      </span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold flex gap-2">
-                      Database:
-                      <span className="flex gap-2">
-                        {/* {skillsData.frontend.map((item) => {
-                      return (
-                        <Icon
-                          key={item.icon}
-                          fontSize={16}
-                          icon={item.icon}
-                          className=""
-                        />
-                      );
-                    })} */}
-                      </span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold flex gap-2">
-                      DevOps:
-                      <span className="flex gap-2">
-                        {/* {skillsData.frontend.map((item) => {
-                      return (
-                        <Icon
-                          key={item.icon}
-                          fontSize={16}
-                          icon={item.icon}
-                          className=""
-                        />
-                      );
-                    })} */}
-                      </span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold flex gap-2">
-                      Tools:
-                      <span className="flex gap-2">
-                        {/* {skillsData.frontend.map((item) => {
-                      return (
-                        <Icon
-                          key={item.icon}
-                          fontSize={16}
-                          icon={item.icon}
-                          className=""
-                        />
-                      );
-                    })} */}
-                      </span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold flex gap-2">
-                      Integrations:
-                      <span className="flex gap-2">
-                        {/* {skillsData.frontend.map((item) => {
-                      return (
-                        <Icon
-                          key={item.icon}
-                          fontSize={16}
-                          icon={item.icon}
-                          className=""
-                        />
-                      );
-                    })} */}
-                      </span>
-                    </p>
-                  </div>
-                </TabsContent>
-              </Tabs>
+              <ContentProjectSkills />
               <div className="absolute top-10 right-8 space-x-2 flex items-start">
                 <Icon
                   fontSize={16}
@@ -532,7 +350,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
           </CollapsibleControlled>
         </section>
         <section className="mb-8">
-        <CollapsibleControlled
+          <CollapsibleControlled
             title={
               <>
                 🧩<span className="ml-2">Features</span>
@@ -540,7 +358,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
             }
           >
             <div className="grid md:grid-cols-3 gap-8">
-            {projectData.features.map((item, index) => {
+              {projectData.features.map((item, index) => {
                 return (
                   <Card
                     key={`${item.name}-${index}`}
@@ -569,13 +387,21 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
                         <Carousel>
                           <CarouselContent>
                             <CarouselItem>
-                              <Image
+                            <Dialog>
+                      <DialogTrigger asChild className="cursor-pointer">
+                      <Image
                                 src={"/assets/images/project.png"}
                                 loading="lazy"
                                 alt="About"
                                 fill
                                 className="object-cover rounded-sm !relative right-0 !h-[14rem]"
                               />
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogCarousel />
+                      </DialogContent>
+                    </Dialog>
+                              
                             </CarouselItem>
                             <CarouselItem>
                               <Image
@@ -647,10 +473,9 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
               })}
             </div>
           </CollapsibleControlled>
-      
         </section>
         <section className="mb-8">
-        <CollapsibleControlled
+          <CollapsibleControlled
             title={
               <>
                 💡<span className="ml-2">Challenges & Solutions</span>
@@ -658,7 +483,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
             }
           >
             <div className="space-y-8">
-            <Card className="gap-0">
+              <Card className="gap-0">
                 <CardHeader>
                   <CardTitle>
                     1. System performance drops sharply as data increases

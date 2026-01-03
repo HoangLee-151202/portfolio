@@ -5,6 +5,11 @@ export const projectData = {
     name: "CHUOICANHO",
     shortDescription: "Real Estate Management System",
     description: "The project is a modern web platform with a focus on performance, stability and user experience. The system is built with a flexible architecture, easy to expand and suitable for large-scale growth.",
+    images: [
+        "/assets/images/project.png",
+        "/assets/images/project.png",
+        "/assets/images/project.png",
+    ],
     responsibilities: [
         "Built front-end and back-end features for seamless user experience.",
         "Developed and integrated secure, scalable REST/GraphQL APIs.",
