@@ -4,9 +4,10 @@ import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
 import { ViewEnum } from ".";
 import { cn } from "@/lib/utils";
+import { BreadcrumSkillsType } from "@/app/config/menu";
 
 interface TypeSkillsProps {
-  viewActive: ViewType;
+  viewActive: BreadcrumSkillsType;
 }
 
 export default function TypeSkills(props: TypeSkillsProps) {
