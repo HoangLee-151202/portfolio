@@ -20,3 +20,24 @@ export const EXTRA_ACTION = [
     { id: 'zoom', icon: Fullscreen, opposite: FullscreenExit },
     { id: 'theme', icon: DarkMode, opposite: LightMode },
   ];
+
+  export type BreadcrumSkillsType = keyof typeof BREADCRUM_SKILLS;
+  export type BreadcrumbSkillsItem =
+  typeof BREADCRUM_SKILLS[BreadcrumSkillsType];
+  export const BREADCRUM_SKILLS =  {
+    'skills': {
+      id: 'skills',
+      label: "Skills",
+      icon: ''
+    },
+    'projects': {
+      id: 'projects',
+      label: "Projects",
+      icon: '🗂️'
+    },
+    'project': {
+      id: 'project',
+      label: "Project",
+      icon: '🗂️'
+    }
+  } as const

@@ -5,17 +5,17 @@ import * as motion from "motion/react-client";
 import { AnimatePresence, LayoutGroup } from "motion/react";
 import { Button } from "@/components/ui/button";
 import ProjectSkills from "./ProjectSkills";
+import { BreadcrumSkillsType } from "@/app/config/menu";
 
-export type ViewType = "Skills" | "Projects" | "Project";
 export enum ViewEnum {
-  Skills = "Skills",
-  Projects = "Projects",
-  Project = "Project",
+  Skills = "skills",
+  Projects = "projects",
+  Project = "project",
 }
 export default function Skills() {
-  const [viewActive, setViewActive] = useState<ViewType>("Skills");
+  const [viewActive, setViewActive] = useState<BreadcrumSkillsType>("skills");
 
-  const onChangeView = (view: ViewType) => {
+  const onChangeView = (view: BreadcrumSkillsType) => {
     setViewActive(view);
   };
   return (
