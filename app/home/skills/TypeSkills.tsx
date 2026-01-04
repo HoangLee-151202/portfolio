@@ -2,7 +2,7 @@ import { PersonalInfoData } from "@/app/mocks/personal-info";
 import { CardList } from "@/app/components/CardList";
 import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
-import { ViewEnum, ViewType } from ".";
+import { ViewEnum } from ".";
 import { cn } from "@/lib/utils";
 
 interface TypeSkillsProps {

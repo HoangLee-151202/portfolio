@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useEffect, useState } from "react";
-import { ViewEnum, ViewType } from ".";
+import { ViewEnum } from ".";
 import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
