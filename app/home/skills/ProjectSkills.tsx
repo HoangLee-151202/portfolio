@@ -61,7 +61,7 @@ export default function ProjectSkills(props: ProjectSkillsProps) {
             variant="ghost"
             size="icon"
             onClick={() => {
-              onChangeView("Skills");
+              onChangeView('skills');
               // setProjects([]);
             }}
           >

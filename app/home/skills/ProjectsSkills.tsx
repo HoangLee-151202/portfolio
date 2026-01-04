@@ -234,7 +234,7 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
               </AnimatePresence> */}
               <Breadcrumb>
                 <BreadcrumbList>
-                <AnimatePresence mode="wait" propagate>
+                <AnimatePresence mode="wait">
                   {breadcrumb.map((item, index) => {
                     if (index !== 0 && index === breadcrumb.length - 1)
                       return (
