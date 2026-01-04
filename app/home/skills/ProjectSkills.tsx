@@ -10,7 +10,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@iconify/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ViewType } from ".";
 import * as motion from "motion/react-client";
 import { AnimatePresence, LayoutGroup } from "motion/react";
 import { projectData } from "@/app/mocks/projects";
@@ -27,10 +26,11 @@ import {
 import Link from "next/link";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import DialogCarousel from "./DialogCarousel";
+import { BreadcrumSkillsType } from "@/app/config/menu";
 
 interface ProjectSkillsProps {
-  onChangeView: (view: ViewType) => void;
-  viewActive: ViewType;
+  onChangeView: (view: BreadcrumSkillsType) => void;
+  viewActive: BreadcrumSkillsType;
 }
 
 export type TabItem = {

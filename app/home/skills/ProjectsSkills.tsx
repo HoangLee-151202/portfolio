@@ -241,7 +241,7 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
                         <BreadcrumbItem id={item.id}>
                           <motion.h5 key={`breadcrum-${item.id}`}
                         initial={{opacity: 0, width: 0}}
-                        animate={{opacity: 1, width: 'max-content', transition: {delay: isFullScreen ? 0 : 1.3, duration: 0.5}}}
+                        animate={{opacity: 1, width: 'revert-layer', transition: {delay: isFullScreen ? 0 : 1.3, duration: 0.5}}}
                         exit={{opacity: 0, width: 0}} className="font-bold pl-4 text-nowrap overflow-hidden">
                             {item.icon}
                             <span className="ml-3">{item.label}</span>
