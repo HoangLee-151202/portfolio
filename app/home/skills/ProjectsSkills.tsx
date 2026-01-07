@@ -427,7 +427,8 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
                       display: "block",
                       transition: {
                         duration: 0.3,
-                        delay: index * 0.05 + (projects.length ? 0 : 1.3),
+                        // delay: index * 0.05 + (projects.length ? 0 : 1.3),
+                        delay: index * 0.05 + (isFullScreen ? 0 : 1.3),
                       },
                     }}
                     exit={{
