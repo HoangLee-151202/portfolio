@@ -60,7 +60,11 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import { Spinner } from "@/components/ui/spinner";
-import { BREADCRUM_SKILLS, BreadcrumbSkillsItem, BreadcrumSkillsType } from "@/app/config/menu";
+import {
+  BREADCRUM_SKILLS,
+  BreadcrumbSkillsItem,
+  BreadcrumSkillsType,
+} from "@/app/config/menu";
 interface ProjectsSkillsProps {
   onChangeView: (view: BreadcrumSkillsType) => void;
   viewActive: BreadcrumSkillsType;
@@ -106,7 +110,9 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [breadcrumb, setBreadcrumb] = useState<BreadcrumbSkillsItem[]>([BREADCRUM_SKILLS.projects]);
+  const [breadcrumb, setBreadcrumb] = useState<BreadcrumbSkillsItem[]>([
+    BREADCRUM_SKILLS.projects,
+  ]);
   const [projects, setProjects] = useState<
     typeof PersonalInfoData.skills.projects
   >([]);
@@ -162,30 +168,13 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
 
   const handleChangeView = (view: BreadcrumSkillsType) => {
     onChangeView(view);
-    let isIndexPrev = breadcrumb.findIndex((item) => item.id === view)
-    console.log('isIndexPrev: ', isIndexPrev)
-    console.log(breadcrumb)
-    if (isIndexPrev >= 0) {
-      if (view === 'skills') {
-        setBreadcrumb([BREADCRUM_SKILLS.projects])
-      } else {
-        setBreadcrumb((prev) => prev.slice(0, isIndexPrev + 1))
-      }
-      
-    } else {
-      
-    }
-
-    if (view === ViewEnum.Projects) {
-      setBreadcrumb((prev) => [BREADCRUM_SKILLS.skills, ...prev])
-    }
-    
-  }
+  };
 
   useEffect(() => {
     if (isFullScreen) buildPagination(1);
   }, [isFullScreen]);
 
+  const ComponentButtonProjects = isFullScreen ? 'h5' : Button;
   return (
     <AnimatePresence mode="wait" propagate>
       <Card
@@ -222,57 +211,61 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
                     exit={{ opacity: 0, width: 0, x: "-1rem" }}
                     transition={{ duration: 0.5, delay: 1.3 }}
                     variant="ghost"
-                    size="icon"
                     onClick={() => {
                       handleChangeView("skills");
                       setProjects([]);
                     }}
                   >
-                    <ChevronLeftIcon strokeWidth={6} />
+                    Skills
                   </Button>
                 )}
               </AnimatePresence> */}
               <Breadcrumb>
                 <BreadcrumbList>
                 <AnimatePresence mode="wait">
-                  {breadcrumb.map((item, index) => {
-                    if (index !== 0 && index === breadcrumb.length - 1)
-                      return (
-                        <BreadcrumbItem id={item.id}>
-                          <motion.h5 key={`breadcrum-${item.id}`}
-                        initial={{opacity: 0, width: 0}}
-                        animate={{opacity: 1, width: 'revert-layer', transition: {delay: isFullScreen ? 0 : 1.3, duration: 0.5}}}
-                        exit={{opacity: 0, width: 0}} className="font-bold pl-4 text-nowrap overflow-hidden">
-                            {item.icon}
-                            <span className="ml-3">{item.label}</span>
-                          </motion.h5>
-                        </BreadcrumbItem>
-                      );
-                    return (
-                      <>
-                      
-                      <BreadcrumbItem id={item.id}>
-                      
+                  {viewActive === ViewEnum.Projects && (
+                    
+                    <motion.span
+                    initial={{ opacity: 0, width: 0, x: "-1rem" }}
+                    animate={{
+                      opacity: 1,
+                      width: "revert-layer",
+                      x: 0,
+                      transition: {
+                        delay: isFullScreen ? 0 : 1.3,
+                        duration: 0.5,
+                      },
+                    }}
+                    exit={{ opacity: 0, width: 0, x: "-1rem" }}
+                    className="flex items-center gap-2"
+                    >
+                      <BreadcrumbItem id={"skills"}>
                         <Button
-                        key={`breadcrum-${item.id}`}
-                        initial={{opacity: 0, width: 0}}
-                        animate={{opacity: 1, width: 'max-content', transition: {delay: isFullScreen ? 0 : 1.3, duration: 0.5}}}
-                        exit={{opacity: 0, width: 0}}
+                          key={`breadcrum-${"skills"}`}
+                         
                           variant="ghost"
-                          className={cn("text-lg font-bold", breadcrumb.length === 1 ? 'text-heading' : '')}
-                          onClick={() => handleChangeView(item.id)}
+                          className="text-lg text-heading font-bold pl-4 text-nowrap overflow-hidden"
+                          onClick={() => handleChangeView('skills')}
                         >
-                          {item.icon}
-                          <span className="ml-1">{item.label}</span>
+                          {"🗂️"}
+                          <span className="ml-3">{"Skills"}</span>
                         </Button>
-                        
                       </BreadcrumbItem>
-                      {index !== breadcrumb.length - 1 && <BreadcrumbSeparator />}
-                      
-                      </>
-                    );
-                  })}
+                      <BreadcrumbSeparator />
+                    </motion.span>
+                  )}
                   </AnimatePresence>
+                  <BreadcrumbItem id={"projects"}>
+                    <ComponentButtonProjects
+                      key={`breadcrum-${"projects"}`}
+                      variant="ghost"
+                      className="text-lg text-heading font-bold pl-4 text-nowrap overflow-hidden gap-2 inline-flex items-center justify-center"
+                      onClick={() => viewActive === ViewEnum.Skills && handleChangeView('projects')}
+                    >
+                      <span>🗂️</span>
+                      <span className="">{"Projects"}</span>
+                    </ComponentButtonProjects>
+                  </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
               {/* {viewActive === ViewEnum.Skills ? (
