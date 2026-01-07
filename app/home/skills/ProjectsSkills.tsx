@@ -224,7 +224,6 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
                 <BreadcrumbList>
                 <AnimatePresence mode="wait">
                   {viewActive === ViewEnum.Projects && (
-                    
                     <motion.span
                     initial={{ opacity: 0, width: 0, x: "-1rem" }}
                     animate={{
@@ -268,24 +267,9 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
-              {/* {viewActive === ViewEnum.Skills ? (
-                <Button
-                  variant="ghost"
-                  className="text-lg font-bold"
-                  onClick={() => handleChangeView("Projects")}
-                >
-                  🗂️
-                  <span className="ml-1">Projects</span>
-                </Button>
-              ) : (
-                <h5 className="font-bold pl-4">
-                  🗂️
-                  <span className="ml-3">Projects</span>
-                </h5>
-              )} */}
             </div>
           </CardTitle>
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {isFullScreen && (
               <CardAction
                 exit={{ opacity: 0 }}
@@ -419,7 +403,7 @@ export default function ProjectsSkills(props: ProjectsSkillsProps) {
           transition={{ delay: 0.5 }}
           className={cn("grid content-start h-full gap-x-8 gap-y-6 relative")}
         >
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {pagination.isLoading ? (
               <div className="absolute inset-0 flex items-center justify-center">
                 <Spinner
