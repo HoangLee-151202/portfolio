@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Fira_Code, Pacifico, Raleway } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { AppProvider } from "./context/AppContext";
+import Layout from "./components/Layout";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,18 +32,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const supabaseUrl = "https://qrpdfdgniphartwuyeqp.supabase.co";
+  // const supabaseKey = process.env.SUPABASE_KEY;
+  // const supabase = createClient(supabaseUrl, supabaseKey);
+
   return (
     <html lang="en" className="dark">
       <body
-        className={`${firaCode.className} ${raleway.variable} ${pacifico.variable} antialiased`}
+        className={cn(firaCode.className, raleway.variable, pacifico.variable)}
       >
-        <AppProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark">
-            <TooltipProvider>
-              {children}
-            </TooltipProvider>
-          </ThemeProvider>
-        </AppProvider>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

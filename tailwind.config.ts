@@ -56,6 +56,16 @@ const config: Config = {
           foreground: "var(--sidebar-foreground)",
         },
       },
+      width: {
+        'fill': 'fill-available',
+        'webkit-fill': '-webkit-fill-available',
+        'moz-fill': '-moz-available',
+      },
+      height: {
+        'fill': 'fill-available',
+        'webkit-fill': '-webkit-fill-available',
+        'moz-fill': '-moz-available',
+      },
       maxHeight: {
         "container": 'calc(100vh - var(--container-py) - var(--container-py))',
       },
@@ -134,6 +144,19 @@ const config: Config = {
     borderRadius: {
       xl: "0rem",
     },
+    boxShadow: {
+      'b-lg': "0 20px 15px -15px rgb(0 0 0 / 0.1), 0 6px 6px -6px rgb(0 0 0 / 0.1)"  
+    },
+    // width: {
+    //   'fill': 'fill-available',
+    //   'webkit-fill': '-webkit-fill-available',
+    //   'moz-fill': '-moz-available',
+    // },
+    // height: {
+    //   'fill': 'fill-available',
+    //   'webkit-fill': '-webkit-fill-available',
+    //   'moz-fill': '-moz-available',
+    // },
   },
   plugins: [require("tailwindcss-animate")],
 };

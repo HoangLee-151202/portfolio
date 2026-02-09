@@ -6,10 +6,10 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 import { cn } from "@/lib/utils"
 import { motion } from "motion/react"
 
-function Tabs({
+const Tabs = motion.create(({
   className,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+}: React.ComponentProps<typeof TabsPrimitive.Root>)  => {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
@@ -17,7 +17,7 @@ function Tabs({
       {...props}
     />
   )
-}
+})
 
 function TabsList({
   className,

@@ -25,6 +25,16 @@ body {
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: oklch(44.2% 0.017 285.786);
   }
+  .w-fill {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+  }
+  .h-fill {
+    height: -webkit-fill-available;
+    height: -moz-available;
+    height: fill-available;
+  }
 }
 
 @layer base {
@@ -64,7 +74,7 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-    --sidebar-width: 300px;
+    --sidebar-width: 250px;
     --container-px: 10rem;
     --container-py: 5rem;
   }
@@ -113,14 +123,30 @@ body {
   }
 
   h1 { @apply text-4xl font-bold; }
-  h2 { @apply text-3xl font-bold; }
+  h2 { @apply text-lg sm:text-3xl font-bold; }
   h3 { @apply text-2xl font-bold; }
   h4 { @apply text-xl font-bold; }
   h5 { @apply text-lg font-bold; }
   h6 { @apply text-base; }
 
+  html {
+    @apply text-sm sm:text-base
+  }
+  body {
+    @apply antialiased min-h-screen bg-background
+  }
+  main {
+    @apply ml-0 sm:ml-[var(--sidebar-width)]
+  }
   article {
-    @apply text-foreground px-[var(--container-px)] py-[var(--container-py)] mx-auto
+    @apply text-foreground px-6 sm:px-[var(--container-px)] py-3 mx-auto mt-16
+  }
+  aside#sidebar {
+    @apply bg-background h-screen fixed pl-16 pr-4 py-20 w-0 sm:w-[var(--sidebar-width)] hidden sm:block
+  }
+
+  aside#headerbar {
+    @apply w-screen fixed px-6 py-4 flex justify-between sm:hidden
   }
   
 }

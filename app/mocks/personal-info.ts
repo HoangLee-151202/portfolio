@@ -247,24 +247,29 @@ export const PersonalInfoData = {
         skills: [
           {
             name: "React",
+            value: "react",
             icon: React,
           },
           {
             name: "Next.js",
+            value: "nextjs",
             icon: Nextjs,
           },
           {
             name: "Vue.js",
+            value: "vuejs",
             icon: Vue,
           },
           {
-              name: "Tailwind CSS",
-              icon: Tailwindcss,
-            },
-            {
-              name: "TypeScript",
-              icon: Typescript,
-            },
+            name: "Tailwind CSS",
+            value: "tailwindcss",
+            icon: Tailwindcss,
+          },
+          {
+            name: "TypeScript",
+            value: "typescript",
+            icon: Typescript,
+          },
         ]
       },
       {
@@ -272,14 +277,17 @@ export const PersonalInfoData = {
         skills: [
           {
             name: "Node.js",
+            value: "nodejs",
             icon: Nodejs,
           },
           {
             name: "Spring Boot",
+            value: "spring-boot",
             icon: Spring,
           },
           {
             name: "FastAPI",
+            value: "fastapi",
             icon: Fastapi,
           },
         ]
@@ -289,10 +297,12 @@ export const PersonalInfoData = {
         skills: [
           {
             name: "Flutter",
+            value: "flutter",
             icon: Flutter,
           },
           {
               name: "React Native",
+              value: "react-native",
               icon: React,
             },
         ]
@@ -302,22 +312,27 @@ export const PersonalInfoData = {
         skills: [
           {
             name: "PostgreSQL",
+            value: "postgresql",
             icon: Postgresql,
           },
           {
               name: "MySQL",
+              value: "mysql",
               icon: Mysql,
             },
             {
               name: "Redis",
+              value: "redis",
               icon: Redis,
             },
             {
               name: "Elasticsearch",
+              value: "elasticsearch",
               icon: Elasticsearch,
             },
             {
               name: "Cassandra",
+              value: "cassandra",
               icon: Cassandra,
             },
         ]
@@ -327,22 +342,27 @@ export const PersonalInfoData = {
         skills: [
           {
             name: "Kubernetes",
+            value: "kubernetes",
             icon: Kubernetes,
           },
           {
               name: "Docker",
+              value: "docker",
               icon: Docker,
             },
             {
               name: "Prometheus",
+              value: "prometheus",
               icon: Prometheus,
             },
             {
               name: "Grafana",
+              value: "grafana",
               icon: Grafana,
             },
             {
               name: "GitLab",
+              value: "gitlab",
               icon: Gitlab,
             },
         ]
@@ -352,22 +372,27 @@ export const PersonalInfoData = {
         skills: [
           {
             name: "Visual Studio Code",
+            value: "visual-studio-code",
             icon: VisualStudioCode,
           },
           {
               name: "IntelliJ IDEA",
+              value: "intellij-idea",
               icon: IntellijIdea,
             },
             {
               name: "Webstorm",
+              value: "webstorm",
               icon: Webstorm,
             },
             {
               name: "Jira",
+              value: "jira",
               icon: Jira,
             },
             {
               name: "GitHub Actions",
+              value: "github-actions",
               icon: Github,
             },
         ]
@@ -493,377 +518,25 @@ export const PersonalInfoData = {
     {
     name: "CHUOICANHO",
     img: "/assets/images/project.png",
-    type: "Website",
+    type: "website",
     techs: [
       {
         name: "React",
+        value: 'react',
         icon: React,
       },
       {
         name: "Spring Boot",
+        value: 'springBoot',
         icon: Spring,
       },
       {
         name: "PostgreSQL",
+        value: "postgreSQL",
         icon: Postgresql,
       },
     ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },{
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },{
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },{
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },{
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "PORTFOLIO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "PORTFOLIO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },{
-    name: "PORTFOLIO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "PORTFOLIO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "PORTFOLIO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },{
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
-  {
-    name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "Website",
-    techs: [
-      {
-        name: "React",
-        icon: React,
-      },
-      {
-        name: "Spring Boot",
-        icon: Spring,
-      },
-      {
-        name: "PostgreSQL",
-        icon: Postgresql,
-      },
-    ],
-  },
+  }
  ],
   }
 };

@@ -9,7 +9,7 @@ const Pagination = motion.create(({ className, ...props }: React.ComponentProps<
   <nav
     role="navigation"
     aria-label="pagination"
-    className={cn("mx-auto flex w-full justify-center", className)}
+    className={cn("mx-auto flex justify-center", className)}
     {...props}
   />
 ))
@@ -22,7 +22,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-1", className)}
+    className={cn("flex flex-row items-center gap-5", className)}
     {...props}
   />
 ))

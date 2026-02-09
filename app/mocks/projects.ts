@@ -15,17 +15,18 @@ export const projectData = {
         "Developed and integrated secure, scalable REST/GraphQL APIs.",
         "Implemented clean architecture for flexibility and long-term scalability",
         "Optimized performance across front-end, back-end, and database layers.",
-        "Set up CI/CD pipelines and essential monitoring tools."
         ],
         techStack: [
             {
                 name: "Frontend", 
                 techs: [{
                     name: "React",
+                    value: "react",
                     icon: React,
                   },
                   {
                     name: "Next.js",
+                    value: "nextjs",
                     icon: Nextjs,
                   },]
             },
@@ -33,56 +34,66 @@ export const projectData = {
                 name: "Backend", 
                 techs: [{
                     name: "React",
+                    value: "react",
                     icon: React,
                   },
                   {
                     name: "Next.js",
+                    value: "nextjs",
                     icon: Nextjs,
-                  },]
+                  },] 
             },
             {
                 name: "Database", 
                 techs: [{
                     name: "React",
+                    value: "react",
                     icon: React,
                   },
                   {
                     name: "Next.js",
+                    value: "nextjs",
                     icon: Nextjs,
-                  },]
+                  },] 
             },
             {
                 name: "DevOps", 
                 techs: [{
                     name: "React",
+                    value: "react",
                     icon: React,
                   },
                   {
                     name: "Next.js",
+                    value: "nextjs",
                     icon: Nextjs,
-                  },]
+                  },] 
             },
             {
                 name: "Tools", 
                 techs: [{
                     name: "React",
+                    value: "react",
                     icon: React,
                   },
                   {
                     name: "Next.js",
+                    value: "nextjs",
                     icon: Nextjs,
-                  },]
+                  },] 
             },
             {
                 name: "Integrations", 
                 techs: [{
                     name: "React",
+                    value: "react",
                     icon: React,
                   },
                   {
                     name: "Next.js",
+                    value: "nextjs",
                     icon: Nextjs,
-                  },]
+                  },] 
             }
         ],
         overview: [
@@ -206,3 +217,173 @@ export const projectData = {
         ] 
     }]
 }
+
+export const ProjectsSkillFilter = {
+    frontend: {
+      label: 'Frontend',
+      techs: [
+        {
+          value: "react",
+          label: "React",
+        },
+        {
+          value: "nextjs",
+          label: "Next.js",
+        },
+        {
+          value: "vuejs",
+          label: "Vue.js",
+        },
+        {
+          value: "tailwind",
+          label: "Tailwind CSS",
+        },
+        {
+          value: "typeScript",
+          label: "TypeScript",
+        },
+      ]
+    },
+    backend: {
+      label: 'Backend',
+      techs: [
+        {
+          label: "Node.js",
+          value: "nodejs",
+        },
+        {
+          label: "Spring Boot",
+          value: "springBoot",
+        },
+        {
+          label: "FastAPI",
+          value: "fastapi",
+        },
+      ]
+    },
+    mobile: {
+      label: 'Mobile',
+      techs: [
+        {
+          label: "Flutter",
+          value: "flutter",
+        },
+        {
+          label: "React Native",
+          value: "react-native",
+        },
+      ]
+    },
+    dBStorage: {
+      label: 'DB & Storage',
+      techs: [
+        {
+          label: "PostgreSQL",
+          value: "postgresql",
+        },
+        {
+          label: "MySQL",
+          value: "mysql",
+        },
+        {
+          label: "Redis",
+          value: "redis",
+        },
+        {
+          label: "Elasticsearch",
+          value: "elasticsearch",
+        },
+        {
+          label: "Cassandra",
+          value: "cassandra",
+        },
+      ]
+    },
+    devOpsCloud: {
+      label: 'DevOps & Cloud',
+      techs: [
+        {
+          label: "Kubernetes",
+          value: "kubernetes",
+        },
+        {
+          label: "Docker",
+          value: "docker",
+        },
+        {
+          label: "Prometheus",
+          value: "prometheus",
+        },
+        {
+          label: "Grafana",
+          value: "grafana",
+        },
+        {
+          label: "GitLab",
+          value: "gitlab",
+        },
+      ]
+    },
+    toolsWorkflow: {
+      label: 'Tools & Workflow',
+      techs: [
+        {
+          label: "Visual Studio Code",
+          value: "visual-studio-code",
+        },
+        {
+          label: "IntelliJ IDEA",
+          value: "intellij-idea",
+        },
+        {
+          label: "Webstorm",
+          value: "webstorm",
+        },
+        {
+          label: "Jira",
+          value: "jira",
+        },
+        {
+          label: "GitHub Actions",
+          value: "github-actions",
+        },
+      ]
+    },
+  }
+
+  export const ProjectsTypeFilter = [ {
+    value: "corporateWebsite",
+    label: "Corporate Website",
+  },
+  {
+    value: "eCommerce",
+    label: "E-commerce",
+  },
+  {
+    value: "landingPage",
+    label: "Landing Page",
+  },
+  {
+    value: "blog",
+    label: "Blog",
+  },
+  {
+    value: "portfolio",
+    label: "Portfolio",
+  },
+  {
+    value: "booking",
+    label: "Booking",
+  },
+  {
+    value: "webApplication",
+    label: "Web Application",
+  },
+  {
+    value: "mobileApp",
+    label: "Mobile App",
+  },
+  {
+    value: "enterpriseSoftware",
+    label: "Enterprise Software",
+  },]

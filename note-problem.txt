@@ -1,7 +1,7 @@
 1. Overflow Y hidden nhưng bị hidden cả chiều X => Phải dùng Overflow Y Clip <https://chatgpt.com/c/694ea7ed-b2c8-8320-b6eb-a63a2cbe86ed>
 2. layoutId không hoạt động được trong motion, chỉ framer-motion
 3. both screens appear simultaneously AnimatePresence => Sử dụng mode="wait"
-
+4. Kết hợp Page Transition change route với motion => delay change route và sử dụng useAnimationControls
 
 // Vấn đề hiện tại
 
