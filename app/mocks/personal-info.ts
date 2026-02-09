@@ -1,3 +1,4 @@
+import { CardItemsData } from "@/components/common/CardItems";
 import { Cassandra } from "@/public/assets/icons/Cassandra";
 import { Chinese } from "@/public/assets/icons/Chinese";
 import { CircularConnection } from "@/public/assets/icons/CircularConnection";
@@ -192,14 +193,17 @@ export const PersonalInfoData = {
         outstands:  [
           {
             name: "React",
+            value: "react",
             icon: React,
           },
           {
             name: "Node.js",
+            value: "nodejs",
             icon: Nodejs,
           },
           {
             name: "PostgreSQL",
+            value: "postgreSQL",
             icon: Postgresql,
           },
         ]
@@ -209,14 +213,17 @@ export const PersonalInfoData = {
         outstands: [
           {
             name: "Webstorm",
+            value: "webstorm",
             icon: Webstorm,
           },
           {
             name: "GitLab",
+            value: "gitLab",
             icon: Gitlab,
           },
           {
             name: "Jira",
+            value: "jira",
             icon: Jira,
           },
         ]
@@ -226,14 +233,17 @@ export const PersonalInfoData = {
         outstands: [
           {
             name: 'English',
+            value: "english",
             icon: English
         },
         {
             name: 'Chinese',
+            value: "chinese",
             icon: Chinese
         },
         {
             name: 'Vietnamese',
+            value: "vietnamese",
             icon: Vietnamese
         }    
         ]
