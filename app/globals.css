@@ -139,7 +139,7 @@ body {
     @apply ml-0 sm:ml-[var(--sidebar-width)]
   }
   article {
-    @apply text-foreground px-6 sm:px-[var(--container-px)] py-3 mx-auto mt-16
+    @apply text-foreground px-6 sm:px-[var(--container-px)] py-3 mx-auto py-16
   }
   aside#sidebar {
     @apply bg-background h-screen fixed pl-16 pr-4 py-20 w-0 sm:w-[var(--sidebar-width)] hidden sm:block

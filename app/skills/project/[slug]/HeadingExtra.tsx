@@ -23,7 +23,7 @@ export default function HeadingExtraProject() {
           duration: 0.5,
           ease: "easeIn",
         },
-      }} className="fixed top-0 left-0 right-0 z-10 ml-[var(--sidebar-width)]" >
+      }} className="fixed top-0 left-0 right-0 z-50 ml-[var(--sidebar-width)]" >
         <div className="mx-[var(--container-px)] bg-background flex justify-between py-8 shadow-b-lg shadow-orange-400/50">
           <div className="flex gap-4 items-center">
             <div className="relative cursor-pointer group">

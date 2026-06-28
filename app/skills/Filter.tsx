@@ -1,29 +1,16 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { PersonalInfoData } from "@/app/mocks/personal-info";
 import {
-  Card,
   CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useEffect, useRef, useState } from "react";
-import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronLeftIcon, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
@@ -43,9 +30,7 @@ import {
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";

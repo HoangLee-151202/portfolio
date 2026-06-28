@@ -266,7 +266,7 @@ export const PersonalInfoData = {
             icon: Nextjs,
           },
           {
-            name: "Vue.js",
+            name: "Vue.js", 
             value: "vuejs",
             icon: Vue,
           },
@@ -412,7 +412,7 @@ export const PersonalInfoData = {
       {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
-      type: "Website",
+      type: ["Website"],
       techs: [
         {
           name: "React",
@@ -431,7 +431,7 @@ export const PersonalInfoData = {
     {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
-      type: "Website",
+      type: ["Website"],
       techs: [
         {
           name: "React",
@@ -450,7 +450,7 @@ export const PersonalInfoData = {
     {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
-      type: "Website",
+      type: ["Website"],
       techs: [
         {
           name: "React",
@@ -469,7 +469,7 @@ export const PersonalInfoData = {
     {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
-      type: "Website",
+      type: ["Website"],
       techs: [
         {
           name: "React",
@@ -488,7 +488,7 @@ export const PersonalInfoData = {
     {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
-      type: "Website",
+      type: ["Website"],
       techs: [
         {
           name: "React",
@@ -507,7 +507,7 @@ export const PersonalInfoData = {
     {
       name: "CHUOICANHO",
       img: "/assets/images/project.png",
-      type: "Website",
+      type: ["Website"],
       techs: [
         {
           name: "React",
@@ -526,9 +526,10 @@ export const PersonalInfoData = {
    ],
    projects: [
     {
+      id: "",
     name: "CHUOICANHO",
-    img: "/assets/images/project.png",
-    type: "website",
+    images: ["/assets/images/project.png"],
+    type: ["website"],
     techs: [
       {
         name: "React",

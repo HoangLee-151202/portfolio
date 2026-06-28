@@ -1,5 +1,6 @@
-import { LoaderIcon } from "lucide-react"
+"use client"
 
+import { LoaderIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion } from "motion/react"
 

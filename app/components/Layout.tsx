@@ -9,6 +9,7 @@ import Sidebar from "../layout/sidebar";
 import Extra from "../layout/extra";
 import BottomNavigation from "../layout/bottomNav";
 import Headerbar from "../layout/headerbar";
+import LayoutMain from "../layout/LayoutMain";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
@@ -19,11 +20,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <TooltipProvider>
         <AppProvider>
           <PageTransitionContext.Provider value={controls}>
-              <Headerbar/>
-              <Sidebar />
-              <Extra />
-              <BottomNavigation/>
-              <main>{children}</main>
+            <Headerbar />
+            <Sidebar />
+            <Extra />
+            <BottomNavigation />
+            <LayoutMain>{children}</LayoutMain>
           </PageTransitionContext.Provider>
         </AppProvider>
       </TooltipProvider>

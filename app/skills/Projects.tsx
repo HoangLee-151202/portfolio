@@ -1,12 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { PersonalInfoData } from "@/app/mocks/personal-info";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
   TooltipContent,
@@ -39,6 +33,8 @@ import { useEffect } from "react";
 import { useSkills } from "../context/SkillsContext";
 import { AnimatedLink } from "../components/AnimatedLink";
 import { Badge } from "@/components/ui/badge";
+import { useProjects } from "../context/services/Project";
+import { IconMap } from "../components/Icon";
 
 const variants = (viewActive: SkillsViewType) => {
   return {
@@ -54,10 +50,9 @@ const variants = (viewActive: SkillsViewType) => {
       opacity: 0,
       x: "5rem",
       transition: { duration: 0.5, ease: "easeIn" as const },
-    }
-  }
-
-}
+    },
+  };
+};
 
 export default function ProjectsSkills() {
   const controls = usePageTransition();
@@ -65,10 +60,10 @@ export default function ProjectsSkills() {
   const { isFullScreen, setIsFullScreen, projects, pagination, setFilter } =
     useSkills();
 
+  const { projectsOutstanding } = useProjects();
+
   const projectPreview =
-    viewActive === SkillsViewEnum.Skills
-      ? PersonalInfoData.skills.projectsOutstanding
-      : projects;
+    viewActive === SkillsViewEnum.Skills ? projectsOutstanding : projects;
 
   const ComponentButtonProjects = isFullScreen ? "h5" : Button;
 
@@ -168,70 +163,77 @@ export default function ProjectsSkills() {
                 animate={{ display: "block" }}
               />
             </div>
-          ) : projectPreview.length ? (
+          ) : projectPreview?.length ? (
             projectPreview.map((item, index) => {
               return (
-                <AnimatedLink href="/skills/project/1">
-                <motion.figure
-                  key={`${viewActive}-${item.name}-${index}`}
-                  initial={{ opacity: 0.9, scale: 0, display: "none" }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    display: "block",
-                    transition: {
-                      duration: 0.3,
-                      delay: index * 0.05 + (isFullScreen ? 0 : 1.3),
-                    },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    display: "none",
-                    transition: { duration: 0.5 },
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  className="relative aspect-[16/9] w-full bg-zinc-700 rounded-sm cursor-pointer"
-                >
-                  <Image
-                    src={item.img}
-                    loading="lazy"
-                    alt="Project"
-                    fill
-                    className="object-cover rounded-sm !relative"
-                  />
-                  <div className="absolute bottom-12 left-3 flex justify-between w-full">
-              {/* Role: FullStack / FrontEnd / BackEnd */}
-              <div className="space-x-2">
-                  <Badge
-                  variant="secondary"
-                  className={cn("text-white bg-opacity-80 rounded-[0.375rem]", "bg-sky-700")}
-                >
-                  Website
-                </Badge>
-              </div>
-            </div>
-                  <figcaption className="font-bold px-4 py-2 flex items-center">
-                    <span className="after:border-r-2 after:mx-2">
-                      {item.name}
-                    </span>
-                    <div className="flex gap-2">
-                      {item.techs.map((tech, index) => {
+                <AnimatedLink href={`/skills/project/${item.id}`}>
+                  <motion.figure
+                    key={`${viewActive}-${item.name}-${index}`}
+                    initial={{ opacity: 0.9, scale: 0, display: "none" }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      display: "block",
+                      transition: {
+                        duration: 0.3,
+                        delay: index * 0.05 + (isFullScreen ? 0 : 1.3),
+                      },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      display: "none",
+                      transition: { duration: 0.5 },
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    className="relative aspect-[16/9] w-full bg-zinc-700 rounded-sm cursor-pointer"
+                  >
+                    <Image
+                      src={item.images[0] || "/assets/images/empty.png"}
+                      loading="lazy"
+                      alt="Project"
+                      fill
+                      className="object-cover rounded-sm !relative"
+                    />
+                    <div className="absolute bottom-12 left-3 flex justify-between w-full">
+                      {item.type.map((type) => {
                         return (
-                          <Tooltip key={`${item.name}-${index}`}>
-                            <TooltipTrigger asChild>
-                              <div className="cursor-pointer">
-                                <tech.icon width={20} height={20} />
-                              </div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>{tech.name}</p>
-                            </TooltipContent>
-                          </Tooltip>
+                          <div key={type} className="space-x-2">
+                            <Badge
+                              variant="secondary"
+                              className={cn(
+                                "text-white bg-opacity-80 rounded-[0.375rem]",
+                                "bg-sky-700",
+                              )}
+                            >
+                              {type}
+                            </Badge>
+                          </div>
                         );
                       })}
                     </div>
-                  </figcaption>
-                </motion.figure>
+                    <figcaption className="font-bold px-4 py-2 flex items-center">
+                      <span className={item.techs.length ? `after:border-r-2 after:mx-2` : ''}>
+                        {item.name}
+                      </span>
+                      <div className="flex gap-2">
+                        {item.techs.map((tech) => {
+                          const Icon = IconMap[tech.name];
+                          return (
+                            <Tooltip key={`${item.name}-${item.id}`}>
+                              <TooltipTrigger asChild>
+                                <div className="cursor-pointer">
+                                  <Icon width={20} height={20} />
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{tech.name}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          );
+                        })}
+                      </div>
+                    </figcaption>
+                  </motion.figure>
                 </AnimatedLink>
               );
             })

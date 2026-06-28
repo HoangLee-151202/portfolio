@@ -2,14 +2,12 @@
 
 import TypeSkills from "./Type";
 import ProjectsSkills from "./Projects";
-import { useEffect, useState } from "react";
-import { AnimatePresence } from "motion/react";
+import { useState } from "react";
 import { SkillsViewType } from "../lib/types";
-import { usePageTransition } from "../context/PageTransitionContext";
 import { SkillsProvider } from "../context/SkillsContext";
 
 
-export default function Skills() {
+export default function SkillsPage() {
   const [viewActive, setViewActive] = useState<SkillsViewType>("skills");
   
   return (
